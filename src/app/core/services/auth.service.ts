@@ -91,7 +91,7 @@ export class AuthService {
 
         this._setAccountData(response.account);
         this._setTokens(response.accessToken, response.refreshToken);
-        this._router.navigate(['/missions']);
+        this._router.navigate(['/launches']);
 
         setTimeout(() => {
           this._sharedService.show_cover_spinner.next(false);
@@ -121,10 +121,10 @@ export class AuthService {
             return response.account;
           }
 
-          throw new Error('Access token is expired');
+          throw new Error('Access token is expired.');
         }),
         catchError((error: HttpErrorResponse) => {
-          if (error.error?.response === 'Access token is expired' || error.error?.response === 'Access token is invalid') {
+          if (error.error?.response === 'Access token is expired.' || error.error?.response === 'Access token is invalid.') {
             return this.refreshTokens();
           }
 

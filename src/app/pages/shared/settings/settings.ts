@@ -18,6 +18,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './settings.scss'
 })
 export class Settings implements OnInit, OnDestroy {
+
   /**
    * Public variables
    */

@@ -2,7 +2,7 @@
   <div class="card-body p-0">
     <ul class="dashboard-tabs nav nav-pills nav-danger row row-paddingless m-0 p-0 flex-column flex-sm-row">
       @for (page of pagesList; track page.pageUrl; let index = $index) {
-        <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 m-sm-2 my-3 cursor-pointer">
+        <li class="nav-item d-flex col-sm flex-grow-1 flex-shrink-0 p-3 m-sm-2 my-3 cursor-pointer">
           <span [routerLink]="page.pageUrl" routerLinkActive="active"
             class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center">
 

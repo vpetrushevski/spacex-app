@@ -16,6 +16,7 @@ import { SharedService } from '../../core/services/shared.service';
   styleUrl: './verify-account.scss',
 })
 export class VerifyAccount implements OnInit, OnDestroy {
+
   /**
    * Public variables
    */

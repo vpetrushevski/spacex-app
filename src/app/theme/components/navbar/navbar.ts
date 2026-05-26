@@ -11,6 +11,7 @@ import { PageObject } from '../../../core/models/shared.model';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
+
   /**
    * Inputs
    */

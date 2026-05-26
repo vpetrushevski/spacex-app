@@ -3,17 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageObject } from '../../core/models/shared.model';
 import { Settings } from '../shared/settings/settings';
 import { Header } from '../../theme/components/header/header';
-import { Navbar } from '../../theme/components/navbar/navbar';
 import { SharedService } from '../../core/services/shared.service';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-mission',
+  selector: 'app-launch',
   imports: [Header, RouterOutlet],
-  templateUrl: './mission.html',
-  styleUrl: './mission.scss',
+  templateUrl: './launch.html',
+  styleUrl: './launch.scss',
 })
-export class Mission implements OnInit {
+export class Launch implements OnInit {
+
   /**
    * Public variables
    */

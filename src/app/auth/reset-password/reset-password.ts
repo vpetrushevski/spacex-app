@@ -15,6 +15,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './reset-password.scss',
 })
 export class ResetPassword implements OnInit, OnDestroy {
+
   /**
    * Public variables
    */
