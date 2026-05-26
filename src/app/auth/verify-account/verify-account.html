@@ -1,0 +1,26 @@
+@if (verifying_account) {
+  <div class="text-center">
+    <h1 class="text-dark fw-bolder mb-3">Verifying Account</h1>
+    <p class="fs-6 text-dark mb-0">Please wait while we verify your account...</p>
+  </div>
+}
+
+@if (!is_verified) {
+  <div>
+    <div class="text-center mb-10">
+      <h1 class="text-dark fw-bolder mb-3">{{ authenticateErrorResponseObject.title }}</h1>
+    </div>
+    <div class="text-center">
+      <p class="fs-6 text-dark">{{ authenticateErrorResponseObject.info }}</p>
+    </div>
+  </div>
+}
+
+@if (is_verified) {
+    <div class="text-center mb-10">
+      <h1 class="text-dark fw-bolder mb-3">Your account has been verified.</h1>
+    </div>
+  <div class="p-relative text-center">
+    <button [routerLink]="'/auth/login'" class="btn btn-lg btn-spacex w-100">Login to your account</button>
+  </div>
+}

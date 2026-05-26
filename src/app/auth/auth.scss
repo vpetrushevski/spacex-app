@@ -1,0 +1,24 @@
+.auth-holder {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+
+  .bgi-banner {
+    min-height: inherit;
+
+    background-image: url("/assets/img/banner_space.jpg");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 992px) {
+  .auth-holder {
+    .bgi-banner {
+      background-attachment: fixed;
+    }
+  }
+}

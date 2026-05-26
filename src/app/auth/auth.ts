@@ -1,19 +1,16 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterOutlet } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-
-import { SharedService } from './core/services/shared.service';
+import { SharedService } from '../core/services/shared.service';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  selector: 'app-auth',
+  imports: [RouterOutlet, MatProgressSpinnerModule],
+  templateUrl: './auth.html',
+  styleUrl: './auth.scss',
 })
-export class App implements OnInit, OnDestroy {
-  protected readonly title = signal('Space X | Hornet Security');
-
+export class Auth implements OnInit, OnDestroy {
   /**
    * Public variables
    */
@@ -22,11 +19,10 @@ export class App implements OnInit, OnDestroy {
   /**
    * Private variables
    */
-  private readonly _unsubscribeAll = new Subject<void>();
+  private _unsubscribeAll = new Subject<void>();
 
-  constructor(
-    private readonly _breakpointObserver: BreakpointObserver,
-    private readonly _sharedService: SharedService
+  constructor(private _sharedService: SharedService,
+              private _changeDetectorRef: ChangeDetectorRef
   ) {}
 
   // -----------------------------------------------------------------------------------------------------
@@ -37,7 +33,6 @@ export class App implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    this._checkIsMobile();
     this._subscribeToSpinner();
   }
 
@@ -54,24 +49,14 @@ export class App implements OnInit, OnDestroy {
   // -----------------------------------------------------------------------------------------------------
 
   /**
-   * Function to check is mobile
-   */
-  private _checkIsMobile(): void {
-    this._breakpointObserver.observe(['(max-width: 991px)']).pipe(takeUntil(this._unsubscribeAll)).subscribe({
-      next: (response: BreakpointState) => {
-        this._sharedService.is_mobile.next(response.matches);
-      }
-    })
-  }
-
-  /**
    * Function to subscribe to spinner
    */
   private _subscribeToSpinner(): void {
-    this._sharedService.show_cover_spinner.pipe(takeUntil(this._unsubscribeAll)).subscribe({
+    this._sharedService.show_spinner.pipe(takeUntil(this._unsubscribeAll)).subscribe({
       next: (response: boolean) => {
         this.show_spinner.set(response);
+        // this._changeDetectorRef.detectChanges();
       }
-    })
+    });
   }
 }
