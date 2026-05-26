@@ -1,0 +1,16 @@
+@if (show_spinner()) {
+  <div class="custom-spinner-wrapper">
+    <mat-spinner class="custom-spinner" strokeWidth="1" [diameter]="65"></mat-spinner>
+  </div>
+}
+
+<div class="d-flex flex-column flex-root auth-holder">
+  <div class="d-flex flex-column flex-column-fluid bgi-banner h-100">
+    <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+      <div class="d-flex flex-center flex-column w-100 w-sm-500px bg-body rounded p-5 p-lg-15 mx-auto">
+        <img src="assets/img/logo.png" width="70%" class="mb-10" alt="">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
