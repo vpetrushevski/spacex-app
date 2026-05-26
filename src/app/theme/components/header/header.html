@@ -1,0 +1,156 @@
+<div class="container-custom-fluid p-0">
+  <div class="container-fluid aside flex-row justify-content-between align-items-center d-none d-lg-flex bg-white"
+    [ngClass]="{ 'drawer drawer-start': is_mobile, 'drawer-on w-300': toggle_sidebar }">
+
+    <div class="aside-logo flex-column-auto">
+      <img alt="Logo" src="assets/img/logo.png" class="logo" style="width: 300px !important;">
+    </div>
+
+    <div class="header-actions d-flex flex-row align-items-center">
+      <div class="logged-user d-flex align-items-center flex-column me-3">
+        <div class="text-center flex-column">
+          <span class="text-dark text-hover-primary spacex-title fw-600">
+            {{ currentActiveAccount.firstName }} {{ currentActiveAccount.lastName }}
+          </span>
+        </div>
+      </div>
+
+      <div class="actions d-flex flex-row flex-start">
+        <button class="d-flex align-items-center btn btn-spacex fs-4 px-xl-5 mx-1"
+          (click)="changePassword(); closeSidebar()">
+          <span class="svg-icon svg-icon-1 me-2">
+            <i class="bi bi-gear"></i>
+          </span>
+
+          <span class="d-flex flex-shrink-0">Change Password</span>
+        </button>
+
+        <button class="d-flex align-items-center btn btn-spacex fs-4 px-xl-5 mx-1"
+          (click)="logOut(); closeSidebar()">
+          <span class="svg-icon svg-icon-1 me-2">
+            <i class="bi bi-box-arrow-in-right"></i>
+          </span>
+
+          <span class="d-flex flex-shrink-0">Log Out</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="aside flex-column pt-7 pb-4 pb-lg-7 pt-lg-17 d-lg-none"
+    [ngClass]="{ 'drawer drawer-start w-250': is_mobile, 'drawer-on w-300': toggle_sidebar }">
+
+    <div class="aside-menu flex-column-fluid align-items-center ps-3 ps-lg-5 pe-1">
+      <div class="w-100 hover-scroll-overlay-y pe-2">
+        <div class="menu menu-column menu-rounded fw-400">
+
+          @for (page of pagesList; track page.pageUrl) {
+            <div class="menu-item menu-accordion my-3"
+              [routerLink]="page.pageUrl"
+              routerLinkActive="active"
+              (click)="closeSidebar()">
+
+              <span class="menu-link">
+                <span class="menu-arrow">
+                  <span class="svg-icon svg-icon-5">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none">
+
+                      <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z"
+                        fill="currentColor">
+                      </path>
+
+                      <path opacity="0.3"
+                        d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z"
+                        fill="currentColor">
+                      </path>
+                    </svg>
+                  </span>
+                </span>
+
+                <span class="menu-icon fs-4 me-2">
+                  <i class="bi" [ngClass]="page.pageIcon"></i>
+                </span>
+
+                <span class="menu-title fs-4">
+                  {{ page.pageName }}
+                </span>
+              </span>
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+
+    <div class="aside-footer flex-column-auto px-6 px-lg-9">
+      <div class="d-flex flex-column flex-start">
+
+        <button class="d-flex align-items-center btn btn-light text-dark fs-4 px-5 my-1"
+          (click)="changePassword(); closeSidebar()">
+          <span class="svg-icon svg-icon-1 me-2">
+            <i class="bi bi-gear"></i>
+          </span>
+
+          <span class="d-flex flex-shrink-0">Change Password</span>
+        </button>
+
+        <button class="d-flex align-items-center btn btn-light text-dark fs-4 px-5 my-1"
+          (click)="logOut(); closeSidebar()">
+          <span class="svg-icon svg-icon-1 me-2">
+            <i class="bi bi-box-arrow-in-right"></i>
+          </span>
+
+          <span class="d-flex flex-shrink-0">Log Out</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="header d-flex d-lg-none align-items-center px-4">
+    <div class="btn btn-icon btn-active-icon-primary" (click)="toggleSidebar()">
+      <span class="svg-icon svg-icon-1 mt-1">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none">
+
+          <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z"
+            fill="currentColor">
+          </path>
+
+          <path opacity="0.3"
+            d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z"
+            fill="currentColor">
+          </path>
+        </svg>
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center ms-5">
+      <div class="mobile-logo">
+        <img alt="Logo" src="assets/img/logo.png" class="w-100">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="z-index: 109;"
+  [ngClass]="toggle_sidebar ? 'drawer-overlay' : 'd-none'"
+  (click)="toggleSidebar()">
+</div>
+
+<div class="container-fluid mt-5">
+  <div class="row d-flex align-items-stretch">
+
+    <div class="d-none d-lg-block col-lg-12">
+      <app-navbar [pagesList]="pagesList"></app-navbar>
+    </div>
+
+  </div>
+</div>

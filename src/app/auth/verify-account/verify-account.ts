@@ -10,7 +10,7 @@ import { SharedService } from '../../core/services/shared.service';
 
 @Component({
   selector: 'app-verify-account',
-  imports: [ReactiveFormsModule, RouterLink, NgClass],
+  imports: [ReactiveFormsModule, RouterLink],
 
   templateUrl: './verify-account.html',
   styleUrl: './verify-account.scss',

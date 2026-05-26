@@ -1,5 +1,5 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
@@ -38,7 +38,8 @@ export class Login implements OnDestroy {
   constructor(private _formBuilder: FormBuilder,
               private _authService: AuthService,
               private _sharedService: SharedService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private _changeDetectorRef: ChangeDetectorRef) {
     this._initLoginForm();
   }
 
@@ -110,6 +111,7 @@ export class Login implements OnDestroy {
     this._authService.isEmailRegistered(email).pipe(takeUntil(this._unsubscribeAll)).subscribe({
       next: (response: boolean) => {
         this.is_email_registered = response;
+        this._changeDetectorRef.detectChanges();
       }
     });
   }
