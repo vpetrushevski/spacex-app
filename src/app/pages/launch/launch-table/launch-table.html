@@ -1,0 +1,102 @@
+@if ((dataSource.loading$ | async) || show_spinner) {
+  <div class="custom-spinner-wrapper">
+    <mat-spinner class="custom-spinner" strokeWidth="1" [diameter]="65"></mat-spinner>
+  </div>
+}
+
+<div class="card d-flex flex-column">
+  <div class="card-header border-0 pt-5 d-flex flex-column flex-sm-row justify-content-between align-items-center">
+    <h3 class="card-title align-items-start flex-column d-flex">
+      <span class="fw-bold fs-1 mb-1">{{pageTitle}} Launches</span>
+    </h3>
+  </div>
+
+  <div class="card-body pt-3 pb-3 flex-grow-1">
+    <div class="table-responsive" [ngClass]="dataSource.show_table ? '' : 'd-none'">
+      <table
+        mat-table
+        class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+        matSort
+        matSortActive="dateUtc"
+        matSortDirection="desc"
+        matSortDisableClear
+        aria-label="Launches"
+        [dataSource]="dataSource">
+
+        <ng-container matColumnDef="flightNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-2 fw-600">#</th>
+          <td mat-cell *matCellDef="let row" class="ps-2">
+            <span class="text-muted fw-semibold">{{ row.flightNumber }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-2 fw-600">Launch</th>
+          <td mat-cell *matCellDef="let row" class="ps-2 cursor-pointer" (click)="goToMissionDetails(row.id)">
+            <span class="fw-bold text-dark">{{ row.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateUtc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-table-cell ps-2 fw-600">Date</th>
+          <td mat-cell *matCellDef="let row" class="d-none d-md-table-cell ps-2">
+            <span class="text-muted">{{ row.dateUtc | date : 'dd MMM yyyy HH:mm' }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="landingType">
+          <th mat-header-cell *matHeaderCellDef class="d-none d-lg-table-cell ps-2 fw-600">Landing Type</th>
+          <td mat-cell *matCellDef="let row" class="d-none d-lg-table-cell ps-2">
+            <span class="badge badge-lg badge-light-primary fw-600 fs-6">
+              {{ row.cores[0].landingType || '/' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="d-none d-sm-table-cell ps-2 fw-600">Status</th>
+          <td mat-cell *matCellDef="let row" class="d-none d-sm-table-cell ps-2">
+            <span
+              class="badge badge-lg"
+              [ngClass]="{
+                'badge-light-success': row.success === true,
+                'badge-light-danger': row.success === false,
+                'badge-light-warning': row.success === null || row.success === undefined
+              }">
+              {{ row.success === true ? 'Success' : row.success === false ? 'Failed' : 'Pending' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef class="pe-2 fw-600">Actions</th>
+          <td mat-cell *matCellDef="let row" class="pe-2 ">
+            <button
+              class="btn btn-icon btn-light btn-active-color-primary btn-sm"
+              matTooltip="View launch details"
+              matTooltipPosition="below"
+              (click)="goToMissionDetails(row.id)">
+              <i class="bi bi-eye fs-3"></i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator #paginator [length]="dataSource.totalMissionsCount$ | async" [pageSize]="10"
+        [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-center p-10" *ngIf="dataSource.no_missions">
+    <span class="badge badge-lg badge-light-dark rounded p-10">
+      <i class="bi bi-rocket-takeoff text-gray-400" style="font-size: 64px;"></i>
+    </span>
+    <span class="fs-3 mt-2 text-gray-600 text-center">No launches available</span>
+  </div>
+
+  <div class="d-flex flex-column align-items-center p-10" *ngIf="dataSource.loading_missions">
+    <span class="fs-3 mt-2 text-gray-600 text-center">Loading launches...</span>
+  </div>
+</div>

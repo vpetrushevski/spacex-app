@@ -28,7 +28,7 @@ class PermissionsService {
               panelClass: ['custom-snackbar']
             });
 
-            this._router.navigate(['/missions']);
+            this._router.navigate(['/launches']);
             this._sharedService.is_app_reloading.next(true);
 
             return of(false);

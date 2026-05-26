@@ -11,6 +11,7 @@ import { SharedService } from '../core/services/shared.service';
   styleUrl: './auth.scss',
 })
 export class Auth implements OnInit, OnDestroy {
+
   /**
    * Public variables
    */

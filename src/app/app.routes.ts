@@ -16,9 +16,9 @@ export const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
-    path: 'missions',
+    path: 'launches',
     loadChildren: () =>
-      import('./pages/mission/mission.routes').then(m => m.MISSION_ROUTES),
+      import('./pages/launch/launch.routes').then(m => m.LAUNCH_ROUTES),
     canActivate: [AuthGuardService]
   },
   {

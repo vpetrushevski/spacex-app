@@ -12,6 +12,7 @@ import { SharedService } from './core/services/shared.service';
   styleUrl: './app.scss'
 })
 export class App implements OnInit, OnDestroy {
+
   protected readonly title = signal('Space X | Hornet Security');
 
   /**

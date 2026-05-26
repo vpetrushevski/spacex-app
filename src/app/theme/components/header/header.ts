@@ -18,6 +18,7 @@ import { Navbar } from '../navbar/navbar';
   styleUrl: './header.scss'
 })
 export class Header implements OnInit, OnDestroy {
+
   /**
    * Inputs
    */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PageObject } from '../models/shared.model';
-import { MissionType } from '../enums/mission-type.enum';
+import { LaunchType } from '../enums/launch-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -19,18 +19,18 @@ export class SharedService {
 
   pages: Array<PageObject> = [
     {
-      pageName: 'Latest Mission',
-      pageUrl: MissionType.Latest,
+      pageName: 'Latest Launch',
+      pageUrl: LaunchType.Latest,
       pageIcon: 'bi-rocket-takeoff'
     },
     {
-      pageName: 'Upcoming Missions',
-      pageUrl: MissionType.Upcoming,
+      pageName: 'Upcoming Launches',
+      pageUrl: LaunchType.Upcoming,
       pageIcon: 'bi-rocket'
     },
     {
-      pageName: 'Past Missions',
-      pageUrl: MissionType.Past,
+      pageName: 'Past Launches',
+      pageUrl: LaunchType.Past,
       pageIcon: 'bi-clock-history'
     }
   ];
