@@ -20,7 +20,6 @@ export class ForgotPassword  implements OnDestroy {
    */
   email = new FormControl<string>('', { nonNullable: true });
   is_email_registered = true;
-  is_reset_code_correct = true;
 
   show_reset_password_form = true;
   show_resend_email = false;

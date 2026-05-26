@@ -1,0 +1,137 @@
+.dashboard-tabs {
+  .nav-link {
+    background-color: var(--spacex-white);
+    border: 1px solid var(--spacex-border) !important;
+    transition: all 0.2s ease;
+
+    .nav-text {
+      color: var(--spacex-text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-icon {
+      i {
+        color: var(--spacex-text-muted);
+        font-size: 3rem;
+        transition: color 0.2s ease;
+      }
+
+      .svg-icon svg g [fill] {
+        fill: var(--spacex-text-muted);
+        transition: fill 0.2s ease;
+      }
+    }
+
+    &:hover:not(.active) {
+      background-color: var(--spacex-white);
+      border-color: var(--spacex-primary) !important;
+
+      .nav-text,
+      .nav-icon i {
+        color: var(--spacex-primary);
+      }
+
+      .nav-icon .svg-icon svg g [fill] {
+        fill: var(--spacex-primary);
+      }
+    }
+
+    &.active {
+      background-color: var(--spacex-primary);
+      border-color: var(--spacex-primary) !important;
+
+      .nav-text,
+      .nav-icon i {
+        color: var(--spacex-white);
+      }
+
+      .nav-icon .svg-icon svg g [fill] {
+        fill: var(--spacex-white) !important;
+      }
+    }
+  }
+}
+
+.nav-pills {
+  .nav-link {
+    border-radius: 0.85rem;
+  }
+}
+
+.nav {
+  .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--spacex-white);
+    color: var(--spacex-text-muted);
+    transition: all 0.2s ease;
+
+    .nav-text {
+      flex-grow: 1;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--spacex-text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-icon {
+      width: 2rem;
+      line-height: 0;
+
+      i {
+        color: var(--spacex-text-muted);
+        font-size: 3rem;
+        transition: color 0.2s ease;
+      }
+
+      svg g [fill] {
+        fill: var(--spacex-text-muted);
+        transition: fill 0.2s ease;
+      }
+    }
+
+    &:hover:not(.disabled):not(.active) {
+      background-color: var(--spacex-white);
+      color: var(--spacex-primary);
+
+      .nav-text,
+      .nav-icon i {
+        color: var(--spacex-primary);
+      }
+
+      .nav-icon svg g [fill] {
+        fill: var(--spacex-primary);
+      }
+    }
+
+    &.active {
+      background-color: var(--spacex-primary);
+      color: var(--spacex-white);
+
+      .nav-text,
+      .nav-icon i {
+        color: var(--spacex-white);
+      }
+
+      .nav-icon svg g [fill] {
+        fill: var(--spacex-white);
+      }
+    }
+
+    &.disabled {
+      opacity: 0.6;
+      color: var(--spacex-gray);
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
+
+.svg-icon {
+  &.svg-icon-3x svg {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}

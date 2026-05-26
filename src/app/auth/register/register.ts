@@ -69,7 +69,10 @@ export class Register implements OnDestroy {
       firstName: this._formBuilder.nonNullable.control('', Validators.required),
       lastName: this._formBuilder.nonNullable.control('', Validators.required),
       email: this._formBuilder.nonNullable.control('', Validators.required),
-      password: this._formBuilder.nonNullable.control('', Validators.required)
+      password: this._formBuilder.nonNullable.control('', [
+        Validators.required,
+        Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])[A-Za-z0-9!.@#$%^&*]{8,16}$')
+      ])
     });
   }
 

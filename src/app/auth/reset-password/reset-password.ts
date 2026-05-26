@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, Params, RouterLink } from '@angular/router';
 import { Subject, takeUntil, take, finalize } from 'rxjs';
@@ -21,8 +21,20 @@ export class ResetPassword implements OnInit, OnDestroy {
   accountId = '';
   resetPasswordToken = '';
 
-  newPassword = new FormControl<string>('', { nonNullable: true });
-  repeatNewPassword = new FormControl<string>('', { nonNullable: true });
+  newPassword = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])[A-Za-z0-9!.@#$%^&*]{8,16}$')
+    ]
+  });
+  repeatNewPassword = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*])[A-Za-z0-9!.@#$%^&*]{8,16}$')
+    ]
+  });
 
   password_input_type_text = false;
   repeat_password_input_type_text = false;
