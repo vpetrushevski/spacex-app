@@ -1,1 +1,9 @@
-<p>latest-launch works!</p>
+@if(showSpinner) {
+<div class="custom-spinner-wrapper">
+  <mat-spinner class="custom-spinner" strokeWidth="1" [diameter]="65"></mat-spinner>
+</div>
+}
+
+@if(!showSpinner && launch) {
+<app-launch-details [launch]="launch"></app-launch-details>
+}

@@ -1,0 +1,50 @@
+<div class="card h-100">
+
+  <div class="card-header border-0 pt-5">
+    <h3 class="card-title fw-bold fs-2">Ships</h3>
+  </div>
+
+  <div class="card-body">
+    @if (ships.length) {
+    @for (ship of ships; track ship.id) {
+    <div class="mb-5">
+      <img
+        [src]="ship.image || 'assets/img/no-image.png'"
+        class="img-fluid rounded mb-4 details-image"
+        alt="Ship">
+
+      <h4 class="fw-bolder">{{ ship.name }}</h4>
+
+      <span class="badge badge-light-info me-2">
+        {{ ship.type }}
+      </span>
+
+      <span class="badge badge-light-success">
+        {{ ship.active ? 'Active' : 'Inactive' }}
+      </span>
+
+      <div class="mt-3 text-muted">
+        {{ ship.homePort || '/' }}
+      </div>
+
+      <div class="mt-3">
+        @for (role of ship.roles; track role) {
+        <span class="badge badge-light-primary me-2 mb-2">
+          {{ role }}
+        </span>
+        }
+      </div>
+    </div>
+    }
+    } @else {
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+      <i class="bi bi-water text-gray-400 mb-5"
+         style="font-size: 64px;"></i>
+
+      <span class="text-muted fs-5 text-center">
+        No ship information available.
+      </span>
+    </div>
+    }
+  </div>
+</div>

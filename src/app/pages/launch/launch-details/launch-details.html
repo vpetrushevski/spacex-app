@@ -1,0 +1,460 @@
+<!-- @if(show_spinner) {
+<div class="custom-spinner-wrapper">
+  <mat-spinner class="custom-spinner" strokeWidth="1" [diameter]="65"></mat-spinner>
+</div>
+}
+
+@if (!show_spinner && launchData) {
+<div class="row g-5">
+  <div class="col-12">
+    <div class="card h-100">
+      <div class="card-header border-0 pt-5 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+        <h3 class="card-title d-flex flex-column">
+          <span class="fw-bold fs-1 mb-1">{{ launchData.name }}</span>
+
+          <span class="text-muted fs-6">
+            Flight #{{ launchData.flightNumber }} •
+            {{ launchData.dateUtc | date:'dd MMM yyyy, HH:mm' }}
+          </span>
+        </h3>
+
+        <span class="badge badge-lg"
+              [class.badge-light-success]="launchData.success === true"
+              [class.badge-light-danger]="launchData.success === false"
+              [class.badge-light-warning]="launchData.success === null">
+
+          {{
+            launchData.upcoming
+              ? 'Upcoming'
+              : launchData.success === true
+                ? 'Successful'
+                : launchData.success === false
+                  ? 'Failed'
+                  : 'Unknown'
+          }}
+        </span>
+      </div>
+
+      <div class="card-body py-5">
+        <div class="row align-items-center">
+          <div class="col-lg-3 text-center mb-5 mb-lg-0">
+            <img
+              [src]="launchData.links.patch.large || launchData.links.patch.small || 'assets/img/no-image.png'"
+              class="img-fluid mission-patch"
+              alt="Mission patch">
+          </div>
+
+          <div class="col-lg-9">
+            <h4 class="fw-bolder mb-3">Launch Details</h4>
+
+            <p class="text-muted fs-5 mb-5">
+              {{ launchData.details || 'No mission details available.' }}
+            </p>
+
+            <div class="row">
+              <div class="col-6 col-lg-3 my-2">
+                <span class="fw-bolder d-block">Crew Members</span>
+
+                <span class="badge badge-light-primary">
+                  {{ crewMembers.length }}
+                </span>
+              </div>
+
+              <div class="col-6 col-lg-3 my-2">
+                <span class="fw-bolder d-block">Ships</span>
+
+                <span class="badge badge-light-info">
+                  {{ ships.length }}
+                </span>
+              </div>
+
+              <div class="col-6 col-lg-3 my-2">
+                <span class="fw-bolder d-block">Landing</span>
+
+                <span class="badge badge-light-warning">
+                  {{ launchData.cores?.[0]?.landingType || 'No data' }}
+                </span>
+              </div>
+
+              <div class="col-6 col-lg-3 my-2">
+                <span class="fw-bolder d-block">Upcoming</span>
+
+                <span class="badge badge-light-dark">
+                  {{ launchData.upcoming ? 'Yes' : 'No' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="separator my-5"></div>
+
+            <div class="d-flex flex-wrap gap-2">
+              @if (launchData.links.webcast) {
+              <a class="btn btn-sm btn-light-primary"
+                 [href]="launchData.links.webcast"
+                 target="_blank">
+                Webcast
+              </a>
+              }
+
+              @if (launchData.links.article) {
+              <a class="btn btn-sm btn-light-info"
+                 [href]="launchData.links.article"
+                 target="_blank">
+                Article
+              </a>
+              }
+
+              @if (launchData.links.wikipedia) {
+              <a class="btn btn-sm btn-light-dark"
+                 [href]="launchData.links.wikipedia"
+                 target="_blank">
+                Wikipedia
+              </a>
+              }
+
+              @if (launchData.links.presskit) {
+              <a class="btn btn-sm btn-light-warning"
+                 [href]="launchData.links.presskit"
+                 target="_blank">
+                Presskit
+              </a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Rocket</h3>
+      </div>
+
+      <div class="card-body">
+        @if (rocket) {
+        <img
+          [src]="rocket.flickrImages?.[0] || 'assets/img/no-image.png'"
+          class="img-fluid rounded mb-4 details-image"
+          alt="Rocket">
+
+        <h4 class="fw-bolder">{{ rocket.name }}</h4>
+
+        <p class="text-muted">
+          {{ rocket.description || 'No rocket description available.' }}
+        </p>
+
+        <div class="separator my-4"></div>
+
+        <div class="d-flex justify-content-between my-2">
+          <span class="fw-bolder">Type</span>
+
+          <span class="badge badge-light-primary">
+            {{ rocket.type }}
+          </span>
+        </div>
+
+        <div class="d-flex justify-content-between my-2">
+          <span class="fw-bolder">Success rate</span>
+
+          <span class="badge badge-light-success">
+            {{ rocket.successRatePct }}%
+          </span>
+        </div>
+
+        <div class="d-flex justify-content-between my-2">
+          <span class="fw-bolder">Cost / launch</span>
+
+          <span class="text-muted">
+            {{ rocket.costPerLaunch | number }} $
+          </span>
+        </div>
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-rocket-takeoff text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No rocket information available.
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Capsule</h3>
+      </div>
+
+      <div class="card-body">
+        @if (capsules.length) {
+        @for (capsule of capsules; track capsule.id) {
+        <div class="mb-5">
+
+          <h4 class="fw-bolder">{{ capsule.serial }}</h4>
+
+          <span class="badge badge-light-primary me-2">
+            {{ capsule.type }}
+          </span>
+
+          <span class="badge badge-light-success">
+            {{ capsule.status }}
+          </span>
+
+          <div class="separator my-4"></div>
+
+          <div class="d-flex justify-content-between my-2">
+            <span class="fw-bolder">Reuse count</span>
+
+            <span>{{ capsule.reuseCount }}</span>
+          </div>
+
+          <div class="d-flex justify-content-between my-2">
+            <span class="fw-bolder">Water landings</span>
+
+            <span>{{ capsule.waterLandings }}</span>
+          </div>
+        </div>
+        }
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-box-seam text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No capsule information available.
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Ships</h3>
+      </div>
+
+      <div class="card-body">
+        @if (ships.length) {
+        @for (ship of ships; track ship.id) {
+        <div class="mb-5">
+          <img
+            [src]="ship.image || 'assets/img/no-image.png'"
+            class="img-fluid rounded mb-4 details-image"
+            alt="Ship">
+
+          <h4 class="fw-bolder">{{ ship.name }}</h4>
+
+          <span class="badge badge-light-info me-2">
+            {{ ship.type }}
+          </span>
+
+          <span class="badge badge-light-success">
+            {{ ship.active ? 'Active' : 'Inactive' }}
+          </span>
+
+          <div class="mt-3 text-muted">
+            {{ ship.homePort || '/' }}
+          </div>
+        </div>
+        }
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-water text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No ship information available.
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Crew Members</h3>
+      </div>
+
+      <div class="card-body">
+        @if (crewMembers.length) {
+        @for (member of crewMembers; track member.id) {
+        <div class="d-flex align-items-center mb-5">
+          <img
+            [src]="member.image || 'assets/img/no-image.png'"
+            class="crew-avatar me-4"
+            alt="Crew member">
+
+          <div>
+            <h5 class="fw-bolder mb-1">{{ member.name }}</h5>
+
+            <span class="text-muted d-block">
+              {{ member.agency }}
+            </span>
+
+            <span class="badge badge-light-success">
+              {{ member.status }}
+            </span>
+          </div>
+        </div>
+        }
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-people text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No crew information available.
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Launchpad</h3>
+      </div>
+
+      <div class="card-body">
+        @if (launchpad) {
+        <img
+          [src]="launchpad.images.large?.[0] || 'assets/img/no-image.png'"
+          class="img-fluid rounded mb-4 details-image"
+          alt="Launchpad">
+
+        <h4 class="fw-bolder">{{ launchpad.name }}</h4>
+
+        <p class="text-muted">{{ launchpad.fullName }}</p>
+
+        <span class="badge badge-light-success me-2">
+          {{ launchpad.status }}
+        </span>
+
+        <span class="badge badge-light-primary">
+          {{ launchpad.region }}
+        </span>
+
+        <div class="separator my-4"></div>
+
+        <p class="text-muted">
+          {{ launchpad.details || 'No launchpad details available.' }}
+        </p>
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-geo-alt text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No launchpad information available.
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <div class="card h-100">
+
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title fw-bold fs-2">Landpad</h3>
+      </div>
+
+      <div class="card-body">
+        @if (landpads.length) {
+        @for (landpad of landpads; track landpad.id) {
+        <div class="mb-5">
+          <img
+            [src]="landpad.images.large?.[0] || 'assets/img/no-image.png'"
+            class="img-fluid rounded mb-4 details-image"
+            alt="Landpad">
+
+          <h4 class="fw-bolder">{{ landpad.name }}</h4>
+
+          <p class="text-muted">{{ landpad.fullName }}</p>
+
+          <span class="badge badge-light-info me-2">
+            {{ landpad.type }}
+          </span>
+
+          <span class="badge badge-light-success">
+            {{ landpad.status }}
+          </span>
+        </div>
+        }
+        } @else {
+        <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+          <i class="bi bi-pin-map text-gray-400 mb-5"
+             style="font-size: 64px;"></i>
+
+          <span class="text-muted fs-5 text-center">
+            No landpad information available.
+          </span>
+        </div>
+        }
+
+      </div>
+    </div>
+  </div>
+
+</div>
+} -->
+
+@if(show_spinner) {
+<div class="custom-spinner-wrapper">
+  <mat-spinner class="custom-spinner" strokeWidth="1" [diameter]="65"></mat-spinner>
+</div>
+}
+
+@if (!show_spinner && launchData) {
+<div class="row g-5">
+
+  <div class="col-12">
+    <app-launch-info-card
+      [launch]="launchData"
+      [crewMembersCount]="crewMembers.length"
+      [shipsCount]="ships.length">
+    </app-launch-info-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-rocket-card [rocket]="rocket"></app-rocket-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-capsule-card [capsules]="capsules"></app-capsule-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-crew-card [crewMembers]="crewMembers"></app-crew-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-ship-card [ships]="ships"></app-ship-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-launchpad-card [launchpad]="launchpad"></app-launchpad-card>
+  </div>
+
+  <div class="col-12 col-lg-6 col-xl-4">
+    <app-landpad-card [landpads]="landpads"></app-landpad-card>
+  </div>
+
+</div>
+}
