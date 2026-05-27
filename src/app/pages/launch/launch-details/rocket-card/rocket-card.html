@@ -1,0 +1,42 @@
+<div class="card h-100">
+  <div class="card-header border-0 pt-5">
+    <h3 class="card-title fw-bold fs-2">Rocket</h3>
+  </div>
+
+  <div class="card-body">
+    @if (rocket) {
+    <img
+      [src]="rocket.flickrImages?.[0] || 'assets/img/no-image.png'"
+      class="img-fluid rounded mb-4 details-image"
+      alt="Rocket">
+
+    <h4 class="fw-bolder">{{ rocket.name }}</h4>
+
+    <p class="text-muted">
+      {{ rocket.description || 'No rocket description available.' }}
+    </p>
+
+    <div class="separator my-4"></div>
+
+    <div class="d-flex justify-content-between my-2">
+      <span class="fw-bolder">Type</span>
+      <span class="badge badge-light-primary">{{ rocket.type }}</span>
+    </div>
+
+    <div class="d-flex justify-content-between my-2">
+      <span class="fw-bolder">Success rate</span>
+      <span class="badge badge-light-success">{{ rocket.successRatePct }}%</span>
+    </div>
+
+    <div class="d-flex justify-content-between my-2">
+      <span class="fw-bolder">Cost / launch</span>
+      <span class="text-muted">{{ rocket.costPerLaunch | number }} $</span>
+    </div>
+    } @else {
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 py-10">
+      <i class="bi bi-rocket-takeoff text-gray-400 mb-5" style="font-size: 64px;"></i>
+      <span class="text-muted fs-5 text-center">No rocket information available.</span>
+    </div>
+    }
+  </div>
+</div>

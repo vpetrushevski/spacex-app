@@ -48,7 +48,7 @@ export class LaunchObject {
     public capsules: string[] = [],
     public payloads: string[] = [],
 
-    public Launchpad: string = '',
+    public launchpad: string = '',
 
     public flightNumber: number = 0,
     public name: string = '',

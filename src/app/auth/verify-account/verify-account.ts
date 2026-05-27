@@ -32,7 +32,6 @@ export class VerifyAccount implements OnInit, OnDestroy {
   private _unsubscribeAll = new Subject<void>();
 
   constructor(private _route: ActivatedRoute,
-              private _router: Router,
               private _sharedService: SharedService,
               private _authService: AuthService,
               private _snackBar: MatSnackBar,
