@@ -1,5 +1,5 @@
 <div class="card h-100">
-  <div class="card-header border-0 pt-5">
+  <div class="card-header border-0 py-4">
     <h3 class="card-title fw-bold fs-2">Landpad</h3>
   </div>
 
@@ -8,7 +8,7 @@
     @for (landpad of landpads; track landpad.id) {
     <div class="mb-5">
       <img
-        [src]="landpad.images.large?.[0] || 'assets/img/no-image.png'"
+        [src]="landpad.images.large[0] || 'assets/img/no-image.png'"
         class="img-fluid rounded mb-4 details-image"
         alt="Landpad">
 

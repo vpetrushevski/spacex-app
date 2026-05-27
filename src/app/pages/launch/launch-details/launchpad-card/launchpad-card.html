@@ -1,12 +1,12 @@
 <div class="card h-100">
-  <div class="card-header border-0 pt-5">
+  <div class="card-header border-0 py-4">
     <h3 class="card-title fw-bold fs-2">Launchpad</h3>
   </div>
 
   <div class="card-body">
     @if (launchpad) {
     <img
-      [src]="launchpad.images.large?.[0] || 'assets/img/no-image.png'"
+      [src]="launchpad.images.large[0] || 'assets/img/no-image.png'"
       class="img-fluid rounded mb-4 details-image"
       alt="Launchpad">
 

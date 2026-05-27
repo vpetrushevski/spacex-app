@@ -9,7 +9,7 @@ export const LAUNCH_ROUTES: Routes = [
     children: [
       {
         path: 'latest',
-        loadComponent: () => import('./latest-launch/latest-launch').then(c => c.LatestMission)
+        loadComponent: () => import('./latest-launch/latest-launch').then(c => c.LatestLaunch)
       },
       {
         path: 'details',

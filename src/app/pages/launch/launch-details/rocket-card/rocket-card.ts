@@ -5,7 +5,6 @@ import { RocketObject } from '../../../../core/models/launch.model';
 
 @Component({
   selector: 'app-rocket-card',
-  standalone: true,
   imports: [DecimalPipe],
   templateUrl: './rocket-card.html',
   styleUrl: './rocket-card.scss'

@@ -7,7 +7,6 @@ import { Subject, finalize, forkJoin, of, takeUntil } from 'rxjs';
 import { LaunchService } from '../../../core/services/launch.service';
 
 import { CapsuleObject, CrewMemberObject, LandpadObject, LaunchObject, LaunchpadObject, RocketObject, ShipObject } from '../../../core/models/launch.model';
-import { DatePipe, DecimalPipe } from '@angular/common';
 import { CapsuleCard } from './capsule-card/capsule-card';
 import { CrewCard } from './crew-card/crew-card';
 import { LandpadCard } from './landpad-card/landpad-card';
@@ -18,7 +17,7 @@ import { ShipCard } from './ship-card/ship-card';
 
 @Component({
   selector: 'app-launch-details',
-  imports: [MatProgressSpinnerModule, DatePipe, DecimalPipe, LaunchInfoCard, RocketCard, CapsuleCard, ShipCard, CrewCard, LaunchpadCard, LandpadCard],
+  imports: [MatProgressSpinnerModule, LaunchInfoCard, RocketCard, CapsuleCard, ShipCard, CrewCard, LaunchpadCard, LandpadCard],
   templateUrl: './launch-details.html',
   styleUrl: './launch-details.scss'
 })

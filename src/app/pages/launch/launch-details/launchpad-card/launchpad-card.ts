@@ -4,7 +4,6 @@ import { LaunchpadObject } from '../../../../core/models/launch.model';
 
 @Component({
   selector: 'app-launchpad-card',
-  standalone: true,
   imports: [],
   templateUrl: './launchpad-card.html',
   styleUrl: './launchpad-card.scss'

@@ -4,7 +4,6 @@ import { LandpadObject } from '../../../../core/models/launch.model';
 
 @Component({
   selector: 'app-landpad-card',
-  standalone: true,
   imports: [],
   templateUrl: './landpad-card.html',
   styleUrl: './landpad-card.scss'

@@ -17,19 +17,15 @@ import { LaunchService } from '../../../core/services/launch.service';
 
 @Component({
   selector: 'app-launch-table',
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    MatPaginatorModule
-  ],
+  imports: [CommonModule, MatTableModule, MatSortModule, MatProgressSpinnerModule, MatTooltipModule, MatPaginatorModule],
   templateUrl: './launch-table.html',
   styleUrl: './launch-table.scss'
 })
 export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
 
+  /**
+   * View Child
+   */
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<LaunchObject>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -68,11 +64,17 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
 
+  /**
+   * On init
+   */
   ngOnInit(): void {
     this._subscribeToDataSource();
     this._subscribeToRouteParams();
   }
 
+  /**
+   * After view init
+   */
   ngAfterViewInit(): void {
     this.sort.sortChange
       .pipe(takeUntil(this._unsubscribeAll))
@@ -83,10 +85,13 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
     this.paginator.page
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
-        this._getMissions();
+        this._getLaunches();
       });
   }
 
+  /**
+   * On destroy
+   */
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
@@ -100,6 +105,9 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
   // @ Private methods
   // -----------------------------------------------------------------------------------------------------
 
+  /**
+   * Function to subscribe to datasource
+   */
   private _subscribeToDataSource(): void {
     this.dataSource = new LaunchTableDataSource(
       this._launchService,
@@ -111,6 +119,9 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((data: boolean) => this.show_spinner = data);
   }
 
+  /**
+   * Function to subscribe to route parameters
+   */
   private _subscribeToRouteParams(): void {
     this._route.paramMap
       .pipe(takeUntil(this._unsubscribeAll))
@@ -129,12 +140,15 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
             this.paginator.pageIndex = 0;
           }
 
-          this._getMissions();
+          this._getLaunches();
         }
       });
   }
 
-  private _getMissions(): void {
+  /**
+   * Function to get launches
+   */
+  private _getLaunches(): void {
     const request = new GetLaunchesRequestObject();
 
     request.page = this.paginator ? this.paginator.pageIndex + 1 : 1;
@@ -155,6 +169,9 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.loadMissionsData(request);
   }
 
+  /**
+   * Function to set page title
+   */
   private _setPageTitle(): void {
     switch (this.type) {
       case LaunchType.Upcoming:
@@ -171,7 +188,10 @@ export class MissionTable implements OnInit, AfterViewInit, OnDestroy {
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
-  goToMissionDetails(id: string): void {
+  /**
+   * Function to view launch details
+   */
+  goToLaunchDetails(id: string): void {
     this._router.navigate(['/launches/details'], {
       queryParams: { id }
     });
