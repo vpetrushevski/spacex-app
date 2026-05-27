@@ -1,6 +1,6 @@
 <div class="card h-100">
   @if (launch) {
-  <div class="card-header border-0 pt-5 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+  <div class="card-header border-0 py-4 d-flex flex-row justify-content-between align-items-start align-items-sm-center">
     <h3 class="card-title d-flex flex-column">
       <span class="fw-bold fs-1 mb-1">{{ launch.name }}</span>
 
@@ -55,7 +55,7 @@
           <div class="col-6 col-lg-3 my-2">
             <span class="fw-bolder d-block">Landing</span>
             <span class="badge badge-light-warning">
-              {{ launch.cores?.[0]?.landingType || 'No data' }}
+              {{ launch.cores[0]?.landingType || 'No data' }}
             </span>
           </div>
 

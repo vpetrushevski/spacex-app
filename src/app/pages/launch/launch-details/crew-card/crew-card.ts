@@ -4,7 +4,6 @@ import { CrewMemberObject } from '../../../../core/models/launch.model';
 
 @Component({
   selector: 'app-crew-card',
-  standalone: true,
   imports: [],
   templateUrl: './crew-card.html',
   styleUrl: './crew-card.scss'

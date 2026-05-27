@@ -32,7 +32,7 @@
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-2 fw-600">Launch</th>
-          <td mat-cell *matCellDef="let row" class="ps-2 cursor-pointer" (click)="goToMissionDetails(row.id)">
+          <td mat-cell *matCellDef="let row" class="ps-2 cursor-pointer" (click)="goToLaunchDetails(row.id)">
             <span class="fw-bold text-dark">{{ row.name }}</span>
           </td>
         </ng-container>
@@ -75,7 +75,7 @@
               class="btn btn-icon btn-light btn-active-color-primary btn-sm"
               matTooltip="View launch details"
               matTooltipPosition="below"
-              (click)="goToMissionDetails(row.id)">
+              (click)="goToLaunchDetails(row.id)">
               <i class="bi bi-eye fs-3"></i>
             </button>
           </td>

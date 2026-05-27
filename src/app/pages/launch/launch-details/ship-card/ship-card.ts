@@ -4,7 +4,6 @@ import { ShipObject } from '../../../../core/models/launch.model';
 
 @Component({
   selector: 'app-ship-card',
-  standalone: true,
   imports: [],
   templateUrl: './ship-card.html',
   styleUrl: './ship-card.scss'

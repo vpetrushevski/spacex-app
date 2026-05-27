@@ -47,7 +47,7 @@ export class LaunchTableDataSource extends DataSource<LaunchObject> {
       .pipe(finalize(() => this.loadingSubject.next(false)))
       .subscribe({
         next: (response: PaginatedLaunchesResponseObject) => {
-          const launches = response?.docs ?? [];
+          const launches = response?.launches ?? [];
 
           this.totalMissionsCountSubject.next(response?.totalDocs ?? 0);
           this.missionsSubject.next(launches);

@@ -12,12 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './latest-launch.html',
   styleUrl: './latest-launch.scss',
 })
-export class LatestMission implements OnInit, OnDestroy {
+export class LatestLaunch implements OnInit, OnDestroy {
 
   /**
    * Public variables
    */
-  public showSpinner: boolean = false;
+  public show_spinner: boolean = false;
   public launch: LaunchObject | null = null;
 
   /**
@@ -57,12 +57,12 @@ export class LatestMission implements OnInit, OnDestroy {
    * Function to get latest launch
    */
   public getLatestLaunch(): void {
-    this.showSpinner = true;
+    this.show_spinner = true;
 
     this._launchService.getLatestLaunch().pipe(
         takeUntil(this._unsubscribeAll),
         finalize(() => {
-          this.showSpinner = false;
+          this.show_spinner = false;
           this._changeDetectorRef.detectChanges();
         })
       )

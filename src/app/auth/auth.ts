@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterOutlet } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -22,8 +22,7 @@ export class Auth implements OnInit, OnDestroy {
    */
   private _unsubscribeAll = new Subject<void>();
 
-  constructor(private _sharedService: SharedService,
-              private _changeDetectorRef: ChangeDetectorRef
+  constructor(private _sharedService: SharedService
   ) {}
 
   // -----------------------------------------------------------------------------------------------------
@@ -56,7 +55,6 @@ export class Auth implements OnInit, OnDestroy {
     this._sharedService.show_spinner.pipe(takeUntil(this._unsubscribeAll)).subscribe({
       next: (response: boolean) => {
         this.show_spinner.set(response);
-        // this._changeDetectorRef.detectChanges();
       }
     });
   }
