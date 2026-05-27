@@ -12,7 +12,7 @@ export class GetLaunchesRequestObject {
 export class PaginatedLaunchesResponseObject {
   constructor(
     public launches: LaunchObject[] = [],
-    public totalDocs: number = 0,
+    public totalLaunches: number = 0,
     public limit: number = 0,
     public totalPages: number = 0,
     public page: number = 0
