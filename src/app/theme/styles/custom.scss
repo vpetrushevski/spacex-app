@@ -483,8 +483,7 @@ body {
 }
 
 .btn {
-  &-spacex,
-  &-fleet {
+  &-spacex {
     background-color: var(--spacex-primary) !important;
     border-color: var(--spacex-primary) !important;
     color: var(--spacex-white) !important;
