@@ -1,59 +1,104 @@
-# SpacexApp
+# SpaceX Launches App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12.
+Angular 21 standalone application for browsing SpaceX launches and viewing launch details.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Authentication flow
+- Upcoming launches table
+- Past launches table
+- Latest launch view
+- Launch details view
+- Pagination support
+- Launch status badges
+- Responsive UI
+- SpaceX API integration through custom backend API
+
+## Tech Stack
+
+- Angular 21
+- TypeScript
+- RxJS
+- Angular Material
+- Bootstrap
+- SCSS
+
+## Project Structure
+
+```
+src/
+ ├── app/
+ │    ├── core/
+ │    ├── features/
+ │    ├── shared/
+ │    └── layouts/
+ ├── assets/
+ └── environments/
+```
+
+## Prerequisites
+
+- Node.js 22+
+- Angular CLI 21+
+
+## Installation
+
+```bash
+npm install
+```
+
+## Development Server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Environment Configuration
 
-## Running unit tests
+Update API base URL inside:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```
+src/environments/
 ```
 
-## Running end-to-end tests
+## Main Functionality
 
-For end-to-end (e2e) testing, run:
+### Authentication
 
-```bash
-ng e2e
-```
+The application contains a simple authentication flow with protected routes.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Launches Table
 
-## Additional Resources
+Users can:
+- Browse upcoming launches
+- Browse past launches
+- Navigate through paginated results
+- Open launch details
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Launch Details
+
+Detailed launch information includes:
+- Launch patch
+- Rocket information
+- Launchpad information
+- Crew members
+- Launch success status
+- External links
+
+## Notes
+
+- Application uses standalone Angular architecture.
+- UI is fully responsive.
+- SpaceX public API data is consumed through the backend API layer.
